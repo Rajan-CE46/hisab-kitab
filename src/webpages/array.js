@@ -210,7 +210,7 @@ export default function DataTabelVariable() {
                             })
                             : null}
                     </div>
-                    <h5>Time Complexity: O(n^2) </h5>
+                    <h5>Time Complexity : O(n^2) </h5>
                 </div>
             </div>
         </Fragment>
