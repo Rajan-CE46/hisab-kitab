@@ -96,35 +96,35 @@ export default function DataTabelVariable() {
     };
 
 
-    const generateTable = () => {
-        let table = [];
+    // const generateTable = () => {
+    //     let table = [];
 
-        // Outer loop to create parent
-        for (let i = 0; i < rowValue; i++) {
-            let children = [];
-            //Inner loop to create children
-            for (let j = 0; j < columnsValue; j++) {
-                children.push(
-                    <td>
-                        <BootstrapInput
-                            name={getUniqueKeyFromArrayIndex(i, j)}
-                            onChange={onChangeHandler}
-                        />
-                    </td>
-                );
-            }
-            //   console.log(children);
-            table.push(
-                <TableHead style={{ backgroundColor: "yellow" }}>
-                    <TableRow key={i}>
-                        <div style={{ paddingTop: 20, paddingLeft: 5, color: "green" }}>Person {i + 1} has to pay</div>
-                        <TableCell>{children}</TableCell>
-                    </TableRow>
-                </TableHead>
-            );
-        }
-        return table;
-    };
+    //     // Outer loop to create parent
+    //     for (let i = 0; i < rowValue; i++) {
+    //         let children = [];
+    //         //Inner loop to create children
+    //         for (let j = 0; j < columnsValue; j++) {
+    //             children.push(
+    //                 <td>
+    //                     <BootstrapInput
+    //                         name={getUniqueKeyFromArrayIndex(i, j)}
+    //                         onChange={onChangeHandler}
+    //                     />
+    //                 </td>
+    //             );
+    //         }
+    //         //   console.log(children);
+    //         table.push(
+    //             <TableHead style={{ backgroundColor: "yellow" }}>
+    //                 <TableRow key={i}>
+    //                     <div style={{ paddingTop: 20, paddingLeft: 5, color: "green" }}>Person {i + 1} has to pay</div>
+    //                     <TableCell>{children}</TableCell>
+    //                 </TableRow>
+    //             </TableHead>
+    //         );
+    //     }
+    //     return table;
+    // };
 
     //create final graph
     function addZeros(array) {
@@ -193,7 +193,7 @@ export default function DataTabelVariable() {
                         <TableContainer component={Paper}>
                             <StyledTable aria-label="simple table">
                                 <TableBody style={{ backgroundColor: "#ff7366" }} ref={ref}>
-                                    {/* {generateTable()} */}
+                                    
                                 </TableBody>
                             </StyledTable>
                         </TableContainer>
