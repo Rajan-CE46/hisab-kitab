@@ -22,6 +22,7 @@ function minOf2(x, y) {
 }
 
 function minCashFlowRec(amount) {
+    console.log(amount);
 
     var mxCredit = getMax(amount), mxDebit = getMin(amount);
 

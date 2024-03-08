@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
 import minCashFlow from "./script";
 
+var finalAns = [];
+var personColumn = [];
 const buttonStyle = {
     backgroundColor: "white",
     border: "1px solid rgb(255, 255, 255)",
@@ -15,38 +17,35 @@ const buttonStyle = {
 
 const DataTabelVariable = () => {
     const [rowValue, setRowValue] = useState(0);
-    const [tableArrayData, setTableArrayData] = useState([[]]);
+    const [columnsValue, setColumnsValue] = useState(0);
+    const [tableCellsData, setTableCellsData] = useState();
+    const [tableArrayData] = useState([[]]);
     const [showResult, setShowResult] = useState(false);
-    const [finalAns, setFinalAns] = useState([]);
+
 
     const getUniqueKeyFromArrayIndex = (rowNum, columnNum) => {
         return `${rowNum}-${columnNum}`;
     };
 
     const onChangeHandler = (e) => {
-        const { name, value } = e.target;
-        let [row, col] = name.split("-");
+        let [row, col] = e.target.name.split("-");
         if (row === col) {
             e.target.value = 0;
         }
-        setTableArrayData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
+        console.log(e.target.name, e.target.value);
+        setTableCellsData({
+            ...tableCellsData,
+            [e.target.name]: e.target.value
+        });
         setShowResult(false);
         row = parseInt(row);
         col = parseInt(col);
 
         if (!tableArrayData[row]) {
-            setTableArrayData(prevData => {
-                const newData = [...prevData];
-                newData[row] = [];
-                return newData;
-            });
+            tableArrayData[row] = [];
         }
-        const newData = [...tableArrayData];
-        newData[row][col] = value;
-        setTableArrayData(newData);
+        // console.log(row, col);
+        tableArrayData[row][col] = e.target.value;
     };
 
     const generateTable = () => {
@@ -55,7 +54,7 @@ const DataTabelVariable = () => {
         for (let i = 0; i < rowValue; i++) {
             let children = [];
 
-            for (let j = 0; j < rowValue; j++) {
+            for (let j = 0; j < columnsValue; j++) {
                 children.push(
                     <td key={j}>
                         <input
@@ -77,11 +76,11 @@ const DataTabelVariable = () => {
         return table;
     };
 
-    const addZeros = (array) => {
+    function addZeros(array) {
         let graph = [];
         for (let i = 0; i < rowValue; i++) {
             let col = [];
-            for (let j = 0; j < rowValue; j++) {
+            for (let j = 0; j < columnsValue; j++) {
                 col.push(0);
             }
             graph[i] = col;
@@ -95,22 +94,26 @@ const DataTabelVariable = () => {
                 graph[p][i] = array[p][i];
             }
         }
-
-        let finalAns = minCashFlow(graph);
-        return finalAns;
+        console.log(graph);
+        finalAns = [];
+        finalAns = minCashFlow(graph);
     };
 
     const handleChangeInPersons = (e) => {
         const value = parseInt(e.target.value);
         setRowValue(value);
+        setColumnsValue(value);
         setShowResult(false);
-        setTableArrayData(new Array(value).fill(new Array(value).fill(0)));
+        personColumn = [];
+        for (var i = 0; i < e.target.value; i++) {
+            personColumn.push(`Person ${i + 1} `);
+        }
     };
 
-    const handleChangeInResult = () => {
-        if (tableArrayData.length === 0 || rowValue === 0) return;
-        const finalAns = addZeros(tableArrayData);
-        setFinalAns(finalAns);
+    const handleChangeInResult = (e) => {
+        if (tableArrayData.length === 0 || rowValue === 0 || columnsValue === 0)
+            return;
+        addZeros(tableArrayData)
         setShowResult(true);
     };
 
@@ -121,7 +124,7 @@ const DataTabelVariable = () => {
                     <h4 style={{ paddingRight: 20 }}>Enter total number of persons involved in cash flow: </h4>
                     <input
                         type="number"
-                        min="3"
+                        min="2"
                         max="10"
                         step="1"
                         onChange={handleChangeInPersons}
