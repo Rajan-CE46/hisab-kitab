@@ -3,8 +3,8 @@ import DataTabelVariable from './array';
 
 const Home = () => {
     const body = {
-        color: 'black',
-        backgroundColor: 'grey',
+        color: '#f8f8ff',
+        backgroundColor: '#555555',
         padding: 50,
         marginTop: -25,
         height : '100vh'
