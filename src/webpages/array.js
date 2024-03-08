@@ -5,9 +5,9 @@ var finalAns = [];
 var personColumn = [];
 const buttonStyle = {
     backgroundColor: "white",
-    border: "1px solid rgb(255, 255, 255)",
+    border: "1px solid green",
     borderRadius: 2,
-    color: "#ff7366",
+    color: "green",
     textAlign: 'center',
     textDecoration: 'none',
     fontSize: 'inherit',
@@ -139,7 +139,7 @@ const DataTabelVariable = () => {
                 <br />
                 <div className={"TableContainer"}>
                     <table>
-                        <tbody style={{ backgroundColor: "#ff7366" }}>
+                        <tbody style={{ backgroundColor: "green" }}>
                             {generateTable()}
                         </tbody>
                     </table>
